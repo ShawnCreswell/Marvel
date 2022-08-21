@@ -9,11 +9,29 @@ marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a7
 bcrypt = Bcrypt(app)
 
 # ! Home page
+
 @app.route("/")
+def home4():
+    print("hello")
+    characters = marvel.characters
+    my_characters = characters.all()['data']["results"]
+
+
+    return render_template("home.html", my_characters=my_characters)
+
+@app.route('/search', methods = ['POST'])
+def search():
+    session['name'] = request.form['hero']
+    print("hello")
+    return redirect("/hero")
+
+@app.route("/hero")
 def index():
     characters = marvel.characters
+    comics = marvel.comics
     # img = marvel.image
-    my_characters = characters.all(name = "Black Panther")['data']["results"]
+    my_characters = characters.all(name = session['name'])['data']["results"]
+    coms = comics.all(title = session['name'])['data']["results"]
     pprint("-----------------")
     for char in my_characters:
         pprint(char['thumbnail'])
@@ -22,7 +40,7 @@ def index():
     # my_characters = characters.all(nameStartsWith = "Black")['data']["results"]
     # pprint("-----------------")
     # pprint(my_characters)
-    return render_template("Landing.html", my_characters=my_characters)
+    return render_template("Landing.html", my_characters=my_characters, coms=coms)
 
 
 # ! Create User
