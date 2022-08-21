@@ -96,6 +96,6 @@ a {
 /* Style the back side */
 .flip-card-back {
     background-color: tan;
-    color: white;
+    /* color: white; */
     transform: rotateY(180deg);
 }
