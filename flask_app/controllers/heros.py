@@ -5,9 +5,12 @@ from flask_bcrypt import Bcrypt
 from pprint import pprint
 import requests
 
+
 from marvel import Marvel   
 marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a72560e27f40a5eec919b7f04feca520215feb16")
 bcrypt = Bcrypt(app)
+
+
 
 # ! Home page
 
@@ -16,7 +19,7 @@ def home4():
     print("hello")
     characters = marvel.characters
     my_characters = characters.all()['data']["results"]
-    return render_template("Home.html", my_characters=my_characters)
+    return render_template("home.html", my_characters=my_characters)
 
 @app.route('/search', methods = ['POST'])
 def search():
@@ -29,6 +32,23 @@ def index():
     characters = marvel.characters
     comics = marvel.comics
     # img = marvel.image
-    my_characters = characters.all(name = session['hero'])['data']["results"]
-    coms = comics.all(title = session['hero'])['data']["results"]
+    my_characters = characters.all(name = session['name'])['data']["results"]
+    coms = comics.all(title = session['name'])['data']["results"]
     return render_template("Landing.html", my_characters=my_characters, coms=coms)
+
+
+@app.route('/hero/detail')
+def hero_detail():
+    characters = marvel.characters
+    comics = marvel.comics
+    morecomic = marvel.comics
+    my_characters = characters.all(name = session['name'])['data']["results"]
+    coms = comics.all(title = session['name'])['data']["results"]
+
+    url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=viewCount&q=hulk&key=AIzaSyDmNcGpYoh7kWzRRdoNFY8C9xQS4V1sIyk"
+    data = requests.get(url)
+    
+    pprint(data.json()['items'][0]['snippet'])
+    pprint("------------")
+
+    return render_template("hero_detail.html", my_characters=my_characters, coms=coms)

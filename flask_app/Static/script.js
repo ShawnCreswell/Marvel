@@ -21,3 +21,9 @@ jQuery(document).ready(function($){
     });
     
     });
+
+
+    fetch("https://youtube.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&q=hulk&key=AIzaSyDmNcGpYoh7kWzRRdoNFY8C9xQS4V1sIyk")
+    .then((data)=>{
+        console.log(data)
+    })

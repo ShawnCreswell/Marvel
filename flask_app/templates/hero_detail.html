@@ -108,57 +108,53 @@
                 </div>
             </div>
             <div class="col">
-                <p>hello</p>
             </div>
         </div>
         <!-- Profile container end -->
     </div>
-            <div class="container mt-3" style="width: 1000px ;
+    <div class="container d-flex justify-content-center align-items-center mt-3" style="width: 1000px ;
             margin: 0 auto;" >
-                <div class="card" style="width: 100%;">
-                    <h5 class="card-header text-center">Description</h5>
-                    <div class="card-body text-center">
-                        <p class="card-text">{{char["description"]}}</p>
-                        <a href="/hero/detail" class="btn btn-primary">View more details</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-    <!-- 1 Container end -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Topic</th>
+                    <th scope="col">Available</th>
+                    <th scope="col">More info</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Comics</td>
+                    <td>{{char['comics']['available']}}</td>
+                    <td><a href="" style="color: blue;">More....</a></td>
+                </tr>
+                <tr>
+                    <td>Stories:</td>
+                    <td>{{char['stories']['available']}}</td>
+                    <td><a href="" style="color: blue;">More....</a></td>
+                </tr>
+                <tr>
+                    <td>Stories:</td>
+                    <td>{{char['events']['available']}}</td>
+                    <td><a href="" style="color: blue;">More....</a></td>
+                </tr>
+                <tr>
+                    <td>Series:</td>
+                    <td>{{char['series']['available']}}</td>
+                    <td><a href="" style="color: blue;">More....</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            
+        </div>
+    </div>
+            {% endfor %}
+            <!-- 1 Container end -->
     <div class="container d-flex mt-3" style="width: 1000px ; min-height: 500px;
     margin: 0 auto;">
-            <div class="d-flex flex-wrap justify-content-between ">
-                {% for com in coms  %}
-                <div class="flip-card mt-5 mb-5" style="width: 200px;">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <div class="card" style="min-height: 390px;">                               
-                                <img src="{{com["thumbnail"]["path"]}}.jpg" alt="" style="width: 100%;">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{com['title']}}</h5>
-                                    <a href=""></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flip-card-back border-3 p-2 ">
-                            <h6>Creator: {{com['creators']['items'][0]['name']}}</h6>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <h6 class="text-center">Price</h6>
-                            <p style="font-size: 12px;">${{com['prices'][0]['price']}}</p>
-                            <br>
-                            <br>
-                            <a href="" style="color: blue; font-size: 12px;" >Read more</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
         <div class="d-flex flex-wrap">
+
         </div> 
     </div>
 </body>
