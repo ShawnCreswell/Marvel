@@ -3,8 +3,9 @@ from flask_app import app, render_template, redirect, request, session, flash
 from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
 from pprint import pprint
+import requests
 
-from marvel import Marvel
+from marvel import Marvel   
 marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a72560e27f40a5eec919b7f04feca520215feb16")
 bcrypt = Bcrypt(app)
 
@@ -32,9 +33,15 @@ def index():
     # img = marvel.image
     my_characters = characters.all(name = session['name'])['data']["results"]
     coms = comics.all(title = session['name'])['data']["results"]
-    pprint("-----------------")
-    for char in my_characters:
-        pprint(char['thumbnail'])
+
+
+    # for com in coms:
+    #     pprint("-----------------")
+    #     pprint(com['prices'][0]['price'])
+
+        
+            
+
     # images = characters.all(path = "http://i.annihil.us/u/prod/marvel/i/mg/6/60/5261a80a67e7d")['data']["results"]
     # {'path': 'http://i.annihil.us/u/prod/marvel/i/mg/6/60/5261a80a67e7d', 'extension': 'jpg'}
     # my_characters = characters.all(nameStartsWith = "Black")['data']["results"]

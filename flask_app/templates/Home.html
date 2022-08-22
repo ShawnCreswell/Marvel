@@ -43,7 +43,7 @@
     <!-- NavBar Start -->
     {{data}}
 
-    <nav class="navbar navbar-expand-lg bg-dark">
+    <nav class="navbar navbar-expand-lg bg-danger">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" style="color: white;">Hero Stats</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -86,64 +86,42 @@
     <!-- NavBar End -->
     <!-- 1 Container start -->
     <div class="container2">
-        <!-- Profile Container -->
-        <!-- <form class="d-flex" role="search" action="/search" , method="post">
-        </form>
-        <input type="text" class="live-search-box" placeholder="search here" />
-        <ul class="live-search-list" type="None">
-            <select name="" id="">
-                <option value="">
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 1000px;">
+
+        <div class="card bg-dark" style="width: 18rem;">
+            <div class="card-body">
                 
-                </option>
-            </select>
-        </ul> -->
-        
-<!--         
-        <label for="exampleDataList" class="form-label">Datalist example</label>
-        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-        <datalist id="datalistOptions">
-            {% for char in my_characters %}
-            <option value="{{char['name']}}">
-            {% endfor %}
-        </datalist> -->
-
-        <form class="d-flex" role="search" action="/search" , method="post">
-            <label for="exampleFormControlInput1" class="form-label">Search Character</label>
-            <input type="name" name="hero" class="form-control" id="hero"
-            placeholder="">
-            <input class="btn btn-primary" type="submit" name="" value="Search">
-
+        <form  role="search" action="/search" , method="post">
+                <label for="exampleFormControlInput1" class=" d-flex form-label justify-content-center" style="color: White;"><h2>Search For a Hero</h2></label>
+                <input type="name" name="hero" class="form-control" id="hero"
+                placeholder="">
+                <div class="d-flex justify-content-center align-items-center mt-2"><input class="btn btn-primary" type="submit" name="" value="Search"></div>
         </form>
-
-
         <script src="https://code.jquery.com/jquery-3.5.1.js"
-            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function ($) {
-
-                $('.live-search-list li').each(function () {
-                    $(this).attr('data-search-term', $(this).text().toLowerCase());
-                });
-
-                $('.live-search-box').on('keyup', function () {
-
-                    var searchTerm = $(this).val().toLowerCase();
-
+                jQuery(document).ready(function ($) {
                     $('.live-search-list li').each(function () {
-
-                        if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-
+                        $(this).attr('data-search-term', $(this).text().toLowerCase());
                     });
-
+                    $('.live-search-box').on('keyup', function () {
+                        var searchTerm = $(this).val().toLowerCase();
+                        $('.live-search-list li').each(function () {
+                            if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
+                                $(this).show();
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+                    });
                 });
-
-            });
         </script>
+
+
+
+            </div>
+        </div>
+    </div>
 
 
 

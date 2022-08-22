@@ -6,9 +6,9 @@
 
 .container2 {
     background-color: pink;
-    width: 1000px;
-    min-height: 500px;
-    margin: 0 auto;
+    background-image: url(https://media.wired.com/photos/5955ceabcbd9b77a41915cf6/master/pass/marvel-characters.jpg);
+    
+    min-height: 1000px;
 
 }
 
