@@ -41,7 +41,6 @@
 
 <body>
     <!-- NavBar Start -->
-    {{data}}
     <nav class="navbar navbar-expand-lg bg-danger" >
         <div class="container-fluid">
             <a class="navbar-brand" href="/" style="color: white;">Hero Stats</a>
@@ -120,6 +119,8 @@
                     <th scope="col">Topic</th>
                     <th scope="col">Available</th>
                     <th scope="col">More info</th>
+                    <th scope="col">View on</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -127,30 +128,46 @@
                     <td>Comics</td>
                     <td>{{char['comics']['available']}}</td>
                     <td><a href="" style="color: blue;">More....</a></td>
+                    <td><a href="" style="color: blue;">Social</a></td>
+
                 </tr>
                 <tr>
                     <td>Stories:</td>
                     <td>{{char['stories']['available']}}</td>
                     <td><a href="" style="color: blue;">More....</a></td>
+                    <td><a href="" style="color: blue;">Social</a></td>
+
                 </tr>
                 <tr>
                     <td>Stories:</td>
                     <td>{{char['events']['available']}}</td>
                     <td><a href="" style="color: blue;">More....</a></td>
+                    <td><a href="" style="color: blue;">Social</a></td>
+
                 </tr>
                 <tr>
                     <td>Series:</td>
                     <td>{{char['series']['available']}}</td>
                     <td><a href="" style="color: blue;">More....</a></td>
+                    <td><a href="" style="color: blue;">Social</a></td>
+
                 </tr>
             </tbody>
         </table>
-        <div>
-            
-        </div>
-    </div>
+    
             {% endfor %}
+    
+    </div>
+
+    <div class="container d-flex justify-content-center align-items-center mt-3" style="width: 1000px ;
+    margin: 0 auto;" >
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{data.json()['items'][0]['id']['videoId']}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
             <!-- 1 Container end -->
+
+
+
+
     <div class="container d-flex mt-3" style="width: 1000px ; min-height: 500px;
     margin: 0 auto;">
         <div class="d-flex flex-wrap">

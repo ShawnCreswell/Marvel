@@ -43,12 +43,13 @@ def hero_detail():
     comics = marvel.comics
     morecomic = marvel.comics
     my_characters = characters.all(name = session['name'])['data']["results"]
+    heroName = session['name']
     coms = comics.all(title = session['name'])['data']["results"]
 
-    url = "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=viewCount&q=hulk&key=AIzaSyDmNcGpYoh7kWzRRdoNFY8C9xQS4V1sIyk"
+    url = f"https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&order=relevance&q={session['name']}%20marvel%20character%20stats&safeSearch=moderate&key=AIzaSyDmNcGpYoh7kWzRRdoNFY8C9xQS4V1sIyk"
     data = requests.get(url)
     
-    pprint(data.json()['items'][0]['snippet'])
+    pprint(data.json()['items'][0]['id']['videoId'])
     pprint("------------")
 
-    return render_template("hero_detail.html", my_characters=my_characters, coms=coms)
+    return render_template("hero_detail.html", my_characters=my_characters, coms=coms, data=data)
