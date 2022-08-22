@@ -35,16 +35,56 @@
         }
 
         body{
-            background-image: url("https://images.pexels.com/photos/245250/pexels-photo-245250.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+            background-image: url("https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enUS/Images/disney-FW20-general-plp-iw-tiles-Desktop-400x248px_marvel_tcm221-512217.jpg");
             background-position: center center;
         }
     </style>
 </head>
 
 <body>
+<!-- Navbar start -->
+<nav class="navbar navbar-expand-lg bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="color: white;">Hero Stats</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" style="color: white;">Friends</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                    Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" style="color: white;">Action</a></li>
+                    <li><a class="dropdown-item" href="#" style="color: white;">Another action</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#" style="color: white;">Something else here</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+        </ul>
+        <!-- <form class="d-flex" role="search">
+            <a href="/signin" class="btn btn-primary">Sign in </a>
+        </form> -->
+    </div>
+</div>
+</nav>
+
     <!-- Container start -->
-
-
     <div class="container bg-transparent d-flex justify-content-between gap-5 bg-light mt-4 p-4">
         <div class="col bg-dark p-4">
             <div>
@@ -113,7 +153,7 @@
 
         <div class="col bg-dark p-4"">
             <div>
-                <h1 class=" text-success">Login</h1>
+                <h1 class=" text-danger">Login</h1>
             <form action="/login" , method="post">
                 
                 <div class="mb-3">
@@ -124,7 +164,7 @@
                     <label for="exampleFormControlInput1" class="form-label">Password</label>
                     <input type="name" name="password" class="form-control" id="exampleFormControlInput1" placeholder="">
                 </div>
-                <input class="btn btn-success" type="submit" name="key" value="Login">
+                <input class="btn btn-danger" type="submit" name="key" value="Login">
                 <p>
 
                     {{session}}

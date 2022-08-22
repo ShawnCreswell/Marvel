@@ -9,46 +9,10 @@ from marvel import Marvel
 marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a72560e27f40a5eec919b7f04feca520215feb16")
 bcrypt = Bcrypt(app)
 
-# ! Home page
-
-@app.route("/")
-def home4():
+@app.route("/signin")
+def home():
     print("hello")
-    characters = marvel.characters
-    my_characters = characters.all()['data']["results"]
-
-
-    return render_template("home.html", my_characters=my_characters)
-
-@app.route('/search', methods = ['POST'])
-def search():
-    session['name'] = request.form['hero']
-    print("hello")
-    return redirect("/hero")
-
-@app.route("/hero")
-def index():
-    characters = marvel.characters
-    comics = marvel.comics
-    # img = marvel.image
-    my_characters = characters.all(name = session['name'])['data']["results"]
-    coms = comics.all(title = session['name'])['data']["results"]
-
-
-    # for com in coms:
-    #     pprint("-----------------")
-    #     pprint(com['prices'][0]['price'])
-
-        
-            
-
-    # images = characters.all(path = "http://i.annihil.us/u/prod/marvel/i/mg/6/60/5261a80a67e7d")['data']["results"]
-    # {'path': 'http://i.annihil.us/u/prod/marvel/i/mg/6/60/5261a80a67e7d', 'extension': 'jpg'}
-    # my_characters = characters.all(nameStartsWith = "Black")['data']["results"]
-    # pprint("-----------------")
-    # pprint(my_characters)
-    return render_template("Landing.html", my_characters=my_characters, coms=coms)
-
+    return render_template("index.html")
 
 # ! Create User
 @app.route('/register', methods = ['POST'])
@@ -142,10 +106,10 @@ def show_recipe_favorites(id):
     # return render_template("show.html", user = user, recipe = recipe)
     return redirect (f"dashboard/recipe/{user}", recipe = Recipe.favorites2(data))
 
-@app.route("/")
-def home():
-    print("hello")
-    return redirect("/")
+# @app.route("/")
+# def home():
+#     print("hello")
+#     return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)
