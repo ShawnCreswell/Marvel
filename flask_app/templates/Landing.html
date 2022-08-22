@@ -110,6 +110,9 @@
             <div class="col">
                 <p>hello</p>
             </div>
+        </div>
+        <!-- Profile container end -->
+    </div>
             <div class="container mt-3" style="width: 1000px ;
             margin: 0 auto;" >
                 <div class="card" style="width: 100%;">
@@ -122,9 +125,6 @@
                 </div>
                 {% endfor %}
             </div>
-        </div>
-        <!-- Profile container end -->
-    </div>
     <!-- 1 Container end -->
     <div class="container d-flex mt-3" style="width: 1000px ; min-height: 500px;
     margin: 0 auto;">
@@ -143,6 +143,7 @@
                         </div>
                         <div class="flip-card-back border-3 ">
                             <h5 class="text-center">Description</h5>
+                            <h6>Creator: {{com['creator']}}</h6>
                             <p style="font-size: 12px;">{{com['description']}}</p>
                             <a href="" style="color: blue;">Read more</a>
                             <p></p>
