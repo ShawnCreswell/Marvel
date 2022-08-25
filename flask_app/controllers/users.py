@@ -44,6 +44,9 @@ def index2(id):
         "id": id
     }
     user = User.get_one(data)
+    # user = User.get_all_heros_with_user()
+    # user = User.get_one_with_heros(data)
+    # user = User.favorites(data)
     # user = User.get_one_with_heros(data)
     # heros =  Hero.get_all_with_user()
     print(user)

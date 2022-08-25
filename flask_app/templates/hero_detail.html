@@ -76,7 +76,8 @@
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <button class="btn btn-danger" type="submit">Profile</button>
+                    <!-- <button class="btn btn-danger" type="submit">Profile</button> -->
+                    <a href="/dashboard" class="btn btn-primary">Profile</a>
                 </form>
             </div>
         </div>
@@ -126,7 +127,7 @@
                 <tr>
                     <td>Comics</td>
                     <td>{{char['comics']['available']}}</td>
-                    <td><a href="" style="color: blue;">More....</a></td>
+                    <td><a href="https://www.marvel.com/comics/characters/{{char['id']}}/{{session.name}}" style="color: blue;">More....</a></td>
                     <td><a href="" style="color: blue;">Social</a></td>
 
                 </tr>

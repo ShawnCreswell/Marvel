@@ -4,7 +4,7 @@ from flask_app import flash
 from flask_app.config.mysqlconnection import connectToMySQL
 import re
 
-# from flask_app.models.hero import Hero
+from flask_app.models.hero import Hero
 from pprint import pprint
 
 
@@ -12,7 +12,8 @@ DATABASE = 'marvel'
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 class User:
     def __init__( self , data ):
-        self.id = data['id']
+        self.id = data['id']    
+        self.profile_picture = data['profile_picture']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
@@ -48,27 +49,24 @@ class User:
     #     user_names = User(result[0])
     #     return user_names
 
-    # @classmethod
-    # def get_one_with_heros(cls, data):
-    #     query = "SELECT * FROM users LEFT JOIN heros ON users.id = heros.user_id WHERE users.id = %(id)s ;"
-    #     results = connectToMySQL(DATABASE).query_db(query, data)
-    #     pprint(results)
-    #     user = User(results[0])
-    #     for result in results:
-    #         hero_dict = {
-    #             'id': result['heros.id'],
-    #             'name': result['name'],
-    #             'description': result['description'],
-    #             'instruction': result['instruction'],
-    #             'under': result['under'],
-    #             'date_made': result['date_made'],
-    #             'user_id': result['user_id'],
-    #             'created_at': result['heros.created_at'],
-    #             'updated_at': result['heros.updated_at'],
-    #         }
-    #         user.heros.append(Hero(hero_dict))
-    #     print(user)
-    #     return user
+    @classmethod
+    def get_one_with_heros(cls, data):
+        query = "SELECT name FROM users JOIN likes ON user_id = users.id JOIN heros ON hero_id = heros.id WHERE likes.user_id = %(id)s ;"
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        pprint(results)
+        user = User(results[0])
+        for result in results:
+            hero_dict = {
+                'id': result['heros.id'],
+                'hero_number': result['heros_number'],
+                'name': result['name'],
+                'description': result['description'],
+                'created_at': result['heros.created_at'],
+                'updated_at': result['heros.updated_at'],
+            }
+            user.heros.append(Hero(hero_dict))
+        print(user)
+        return user
 
     # @classmethod
     # def save(cls, data ):
@@ -151,9 +149,27 @@ class User:
     #     query = "DELETE FROM heros WHERE id = %(id)s ;"
     #     results = connectToMySQL(DATABASE).query_db(query, data)
 
-    # @classmethod
-    # def favorites(cls, data):
-    #     query = "SELECT * FROM users LEFT JOIN favorites ON users.id = favorites.user_id LEFT JOIN heros ON favorites.hero_id = heros.id WHERE users.id = %(id)s ;"
-    #     # query = "SELECT * FROM users LEFT JOIN heros ON users.id = heros.user_id WHERE users.id = %(id)s ;"
+    @classmethod
+    def favorites(cls, data):
+        query = "SELECT name FROM likes JOIN heros ON hero_id = heros.id WHERE likes.user_id = %(id)s ;"
+        # query = "SELECT * FROM users LEFT JOIN heros ON users.id = heros.user_id WHERE users.id = %(id)s ;"
+        return connectToMySQL(DATABASE).query_db(query, data)
 
-    #     results = connectToMySQL(DATABASE).query_db(query, data)
+    @classmethod
+    def get_all_heros_with_user(cls):
+        query = "SELECT name FROM likes JOIN heros ON hero_id = heros.id WHERE likes.user_id = %(id)s ;"
+        results = connectToMySQL(DATABASE).query_db(query)
+        print(results)
+        heros =[]
+        for hero in results:
+            heros.append(cls(hero))
+        return heros
+
+
+
+    @classmethod
+    def get_one_with_hero_likes(cls, data):
+        query = "SELECT name FROM users JOIN likes ON user_id = users.id JOIN heros ON hero_id = heros.id WHERE likes.user_id = %(id)s ;"
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        like = cls(result[0])
+        return like
