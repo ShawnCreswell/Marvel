@@ -4,11 +4,11 @@ from flask_app import flash
 from flask_app.config.mysqlconnection import connectToMySQL
 import re
 
-from flask_app.models.recipe import Recipe
+# from flask_app.models.hero import Hero
 from pprint import pprint
 
 
-DATABASE = 'recipes'
+DATABASE = 'marvel'
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 class User:
     def __init__( self , data ):
@@ -17,7 +17,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        self.recipes = []
+        self.heros = []
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
@@ -42,33 +42,33 @@ class User:
 
     # @classmethod
     # def get_one_name(cls,data):
-    #     query = "SELECT first_name FROM users LEFT JOIN recipes ON users.id = recipes.user_id WHERE recipes.user_id= 7;"
+    #     query = "SELECT first_name FROM users LEFT JOIN heros ON users.id = heros.user_id WHERE heros.user_id= 7;"
     #     result = connectToMySQL(DATABASE).query_db(query, data)
     #     print(result)
     #     user_names = User(result[0])
     #     return user_names
 
-    @classmethod
-    def get_one_with_recipes(cls, data):
-        query = "SELECT * FROM users LEFT JOIN recipes ON users.id = recipes.user_id WHERE users.id = %(id)s ;"
-        results = connectToMySQL(DATABASE).query_db(query, data)
-        pprint(results)
-        user = User(results[0])
-        for result in results:
-            recipe_dict = {
-                'id': result['recipes.id'],
-                'name': result['name'],
-                'description': result['description'],
-                'instruction': result['instruction'],
-                'under': result['under'],
-                'date_made': result['date_made'],
-                'user_id': result['user_id'],
-                'created_at': result['recipes.created_at'],
-                'updated_at': result['recipes.updated_at'],
-            }
-            user.recipes.append(Recipe(recipe_dict))
-        print(user)
-        return user
+    # @classmethod
+    # def get_one_with_heros(cls, data):
+    #     query = "SELECT * FROM users LEFT JOIN heros ON users.id = heros.user_id WHERE users.id = %(id)s ;"
+    #     results = connectToMySQL(DATABASE).query_db(query, data)
+    #     pprint(results)
+    #     user = User(results[0])
+    #     for result in results:
+    #         hero_dict = {
+    #             'id': result['heros.id'],
+    #             'name': result['name'],
+    #             'description': result['description'],
+    #             'instruction': result['instruction'],
+    #             'under': result['under'],
+    #             'date_made': result['date_made'],
+    #             'user_id': result['user_id'],
+    #             'created_at': result['heros.created_at'],
+    #             'updated_at': result['heros.updated_at'],
+    #         }
+    #         user.heros.append(Hero(hero_dict))
+    #     print(user)
+    #     return user
 
     # @classmethod
     # def save(cls, data ):
@@ -118,9 +118,12 @@ class User:
         if not EMAIL_REGEX.match(user['email']): 
             is_valid = False
             flash("Invalid email address!", 'email')
-        if user['password'] != user['password_confirm']:
+        if user['password'] != user['password_confirm' ]:
             is_valid = False
             flash("Passwords must match", 'password')
+        if len(user['password']) < 1:
+            is_valid = False
+            flash("Passwords must not be empty", 'password')
         
         return is_valid
 
@@ -145,12 +148,12 @@ class User:
 
     # @classmethod
     # def destroy(cls, data):
-    #     query = "DELETE FROM recipes WHERE id = %(id)s ;"
+    #     query = "DELETE FROM heros WHERE id = %(id)s ;"
     #     results = connectToMySQL(DATABASE).query_db(query, data)
 
     # @classmethod
     # def favorites(cls, data):
-    #     query = "SELECT * FROM users LEFT JOIN favorites ON users.id = favorites.user_id LEFT JOIN recipes ON favorites.recipe_id = recipes.id WHERE users.id = %(id)s ;"
-    #     # query = "SELECT * FROM users LEFT JOIN recipes ON users.id = recipes.user_id WHERE users.id = %(id)s ;"
+    #     query = "SELECT * FROM users LEFT JOIN favorites ON users.id = favorites.user_id LEFT JOIN heros ON favorites.hero_id = heros.id WHERE users.id = %(id)s ;"
+    #     # query = "SELECT * FROM users LEFT JOIN heros ON users.id = heros.user_id WHERE users.id = %(id)s ;"
 
     #     results = connectToMySQL(DATABASE).query_db(query, data)

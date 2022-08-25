@@ -1,4 +1,4 @@
-from ..models.recipe import Recipe
+# from ..models.hero import Hero
 from flask_app import app, render_template, redirect, request, session, flash
 from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
@@ -43,11 +43,13 @@ def index2(id):
     data = {
         "id": id
     }
-    # user = User.get_one(data)
-    user = User.get_one_with_recipes(data)
-    recipes =  Recipe.get_all_with_user()
+    user = User.get_one(data)
+    # user = User.get_one_with_heros(data)
+    # heros =  Hero.get_all_with_user()
     print(user)
-    return render_template("dashboard.html", user = user, recipes=recipes)
+    # return render_template("dashboard.html", user = user, heros=heros)
+    return render_template("dashboard.html", user = user)
+
 
 
 
@@ -73,38 +75,66 @@ def login():
     return redirect(f"/dashboard/{user_in_db.id}")
 
 # ! UPDATE
-
-@app.route("/create_recipe")
-def create_recipe():
-    print("hello")
-    return render_template("create.html")
-# def index2():
-
-# ! READ ONE
-@app.route("/dashboard/recipe/<int:id>")
-def show_recipe(id):
+@app.route("/edit/user/<int:id>")
+def edit_user(id):
     data = {
-        "id": id
+        "id": session['user_id']
     }
+    print("hello")
+    return render_template("edit_user.html", user = User.get_one(data) )
 
-    user = User.get_one_with_recipes(data)
-    print(data)
+@app.route("/edit/user", methods=['post'])
+def update_user():
+    users = session['user_id']
+    if not User.validate_user(request.form):
+        return redirect(f'/edit/user/{users}')
+    hashed_pw = bcrypt.generate_password_hash(request.form['password'])
+    data = {
+        "id": session['user_id'],
+        "first_name": request.form['first_name'],
+        "last_name": request.form['last_name'],
+        "email": request.form['email'], 
+        "password": hashed_pw
+    }
+    User.update(data)
+    session['first_name'] = request.form['first_name']
+    session['last_name'] = request.form['last_name']
 
-    # recipe = Recipe.get_one(data)
-    # return render_template("show.html", user = user, recipe = recipe)
-    return render_template("show.html", user = user)
+    print(request.form)
+    return redirect(f"/dashboard/{users}")
+
+
+# @app.route("/create_hero")
+# def create_hero():
+#     print("hello")
+#     return render_template("create.html")
+# # def index2():
+
+# # ! READ ONE
+# @app.route("/dashboard/hero/<int:id>")
+# def show_hero(id):
+#     data = {
+#         "id": id
+#     }
+
+#     user = User.get_one_with_heros(data)
+#     print(data)
+
+#     # hero = Hero.get_one(data)
+#     # return render_template("show.html", user = user, hero = hero)
+#     return render_template("show.html", user = user)
     
 
-@app.route("/dashboard/recipe/<int:id>", methods = ['POST'])
-def show_recipe_favorites(id):
-    data = {
-        "id": id
-    }
-    print(data)
-    user = session['user_id']
-    # recipe = Recipe.get_one(data)
-    # return render_template("show.html", user = user, recipe = recipe)
-    return redirect (f"dashboard/recipe/{user}", recipe = Recipe.favorites2(data))
+# @app.route("/dashboard/hero/<int:id>", methods = ['POST'])
+# def show_hero_favorites(id):
+#     data = {
+#         "id": id
+#     }
+#     print(data)
+#     user = session['user_id']
+#     # hero = Hero.get_one(data)
+#     # return render_template("show.html", user = user, hero = hero)
+#     return redirect (f"dashboard/hero/{user}", hero = Hero.favorites2(data))
 
 # @app.route("/")
 # def home():

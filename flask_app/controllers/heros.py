@@ -1,4 +1,4 @@
-from ..models.recipe import Recipe
+# from ..models.hero import Hero
 from flask_app import app, render_template, redirect, request, session, flash
 from flask_app.models.user import User
 from flask_bcrypt import Bcrypt
@@ -42,7 +42,7 @@ def hero_detail():
     characters = marvel.characters
     comics = marvel.comics
     morecomic = marvel.comics
-    my_characters = characters.all(name = session['name'])['data']["results"]
+    my_characters = characters.all(nameStartsWith = session['name'])['data']["results"]
     heroName = session['name']
     coms = comics.all(title = session['name'])['data']["results"]
 

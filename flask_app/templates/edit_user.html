@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- based on the folder structure on the right -->
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> -->
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script> -->
+    <!-- <img src="{{ url_for('static', filename='my_img.png') }}"> -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Document</title>
+
+    <style>
+        h1 {
+            color: black;
+        }
+
+        label {
+            color: white;
+        }
+
+        .container {
+            width: 1000px;
+        }
+
+        p {
+            /* background-color: yellow; */
+            width: 300px;
+            color: white;
+            min-height: 100px;
+        }
+
+        /* body{
+            background-image: url("https://images.pexels.com/photos/245250/pexels-photo-245250.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+            background-position: center center;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- Container start -->
+    <nav class="navbar navbar-expand-lg bg-danger">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/" style="color: white;">Marvel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" style="color: white;">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: white;">Friends</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" style="color: white;">Action</a></li>
+                    <li><a class="dropdown-item" href="#" style="color: white;">Another action</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#" style="color: white;">Something else here</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+        </ul>
+        <form class="d-flex" role="search">
+            <a href="/signin" class="btn btn-primary">Sign in </a>
+        </form>
+    </div>
+</div>
+</nav>
+
+    <div class="container bg-transparent d-flex justify-content-between gap-5 bg-light mt-4 p-4">
+        <div class="col bg-dark p-4 d-flex justify-content-between">
+            
+            <div class="">
+                <h1 class="text-primary">EDIT USER</h1>
+                <form action="/edit/user" , method="post">
+                    {% with messages = get_flashed_messages(with_categories = True) %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">First Name </label>
+                        <input type="name" name="first_name" class="form-control" id="exampleFormControlInput1"
+                        placeholder="" value="{{user.first_name}}">
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        {% if category == 'first_name' %}
+                        <span class="form-text text-danger">{{message}}</span>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+                        <input type="name" name="last_name" class="form-control" id="exampleFormControlInput1"
+                        placeholder="" value="{{user.last_name}}">
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        {% if category == 'last_name' %}
+                        <span class="form-text text-danger">{{message}}</span>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        <input type="name" name="email" class="form-control" id="exampleFormControlInput1"
+                        placeholder="" value="{{user.email}}">
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        {% if category == 'email' %}
+                        <span class="form-text text-danger">{{message}}</span>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Enter Your password" value="">
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        {% if category == 'password' %}
+                        <span class="form-text text-danger">{{message}}</span>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Confirm Password:</label>
+                        <input type="password" name="password_confirm" class="form-control" id="exampleFormControlInput1"
+                        placeholder="Enter Your password" value="">
+                        {% if messages %}
+                        {% for category, message in messages %}
+                        {% if category == 'password' %}
+                        <span class="form-text text-danger">{{message}}</span>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="" value="Update">
+                </form>
+                {% endwith %}
+            </div>
+            <div><a href="/create_magazine">Create magazine</a>
+            
+            </div>
+                <a href="/dashboard/{{session.user_id}}">Dashboard</a>
+            <div class="card">
+                <div class="card-body" style="width:300px;">
+                    <div class="m-1" style="width:300px;">
+                        {% for magazine in user.magazines %}
+                        <div>
+                            {{magazine.title}} <a href="/delete/{{magazine.id}}">delete</a>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    </div>
+    <!-- Container end -->
+</body>
+
+</html>
