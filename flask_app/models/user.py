@@ -155,15 +155,15 @@ class User:
         # query = "SELECT * FROM users LEFT JOIN heros ON users.id = heros.user_id WHERE users.id = %(id)s ;"
         return connectToMySQL(DATABASE).query_db(query, data)
 
-    @classmethod
-    def get_all_heros_with_user(cls):
-        query = "SELECT name FROM likes JOIN heros ON hero_id = heros.id WHERE likes.user_id = %(id)s ;"
-        results = connectToMySQL(DATABASE).query_db(query)
-        print(results)
-        heros =[]
-        for hero in results:
-            heros.append(cls(hero))
-        return heros
+    # @classmethod
+    # def get_all_heros_with_user(cls):
+    #     query = "SELECT name FROM likes JOIN heros ON hero_id = heros.id WHERE likes.user_id = %(id)s ;"
+    #     results = connectToMySQL(DATABASE).query_db(query)
+    #     print(results)
+    #     heros =[]
+    #     for hero in results:
+    #         heros.append(cls(hero))
+    #     return heros
 
 
 

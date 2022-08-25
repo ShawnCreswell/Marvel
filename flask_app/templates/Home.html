@@ -72,9 +72,13 @@
                     <a class="nav-link disabled">Disabled</a>
                 </li>
             </ul>
+            {% if session.first_name == user.first_name %}
+            <a href="/logout" class="btn btn-primary">Sign out </a>
+            {% else %}
             <form class="d-flex" role="search">
                 <a href="/signin" class="btn btn-primary">Sign in </a>
             </form>
+            {% endif %}
         </div>
     </div>
 </nav>

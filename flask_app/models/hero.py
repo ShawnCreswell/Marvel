@@ -14,10 +14,13 @@ class Hero:
         self.hero_number = data['hero_number']
         self.name = data['name']
         self.description = data['description']
-        if 'first_name' in data:    
-            self.first_name = data ['first_name']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.users = []
+        if 'first_name' in data:    
+            self.first_name = data ['first_name']
+        if 'first_name' in data:    
+            self.last_name = data ['last_name']    
 
 #     # ! Read ALL
     @classmethod
@@ -56,6 +59,29 @@ class Hero:
 #         print(results)
 #         hero = Hero(results[0])
 #         return hero
+
+    @classmethod
+    def get_hero_with_users(cls, data):
+        query = "SELECT * FROM heros LEFT JOIN likes ON likes.hero_id = hero.id LEFT JOIN users ON likes.user_id = users.id WHERE heros.id = %(id)s;"
+        results = connectToMySQL('recipes').query_db(query, data)
+        # results will be a list of recipe objects with the user attached to each row.
+        hero = cls(results[0])
+        for row_from_db in results:
+            # Now we parse the recipe data to make instances of recipes ="keyword from-rainbow">and add them into our list.
+            user_data = {
+                "id": row_from_db["users.id"],
+                "first_name": row_from_db["first_name"],
+                "last_name": row_from_db["last_name"],
+                "email": row_from_db["email"],
+                "password": row_from_db["password"],
+                "created_at": row_from_db["users.created_at"],
+                "updated_at": row_from_db["users.updated_at"]
+            }
+            if row_from_db['first_name']:
+                hero.users.append(user.User(user_data))
+        return hero
+
+
 
 #     # ! Create
 #     @classmethod

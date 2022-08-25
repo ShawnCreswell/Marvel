@@ -53,7 +53,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" style="color: white;">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/" style="color: white;">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" style="color: white;">Friends</a>
@@ -94,7 +94,14 @@
                 <p></p>
             </div>
             <div class="col">
+                
                 {% for char in my_characters %}
+                    <p>
+                        {% if session.name != my_characters.name %}
+                        <a href="/">Character not available. Go back.</a>
+                        {% endif %}
+                    </p>
+            
                 <div class="card border border-dark border-3" style="width: 18rem;">
                     <img src="{{char["thumbnail"]["path"]}}.jpg" alt="" style="width: 100%;">
                     <div class="card-body text-center">
@@ -110,14 +117,13 @@
                 </div>
             </div>
             <div class="col">
-                <p>hello</p>
             </div>
         </div>
         <!-- Profile container end -->
     </div>
-            <div class="container mt-3" style="width: 1000px ;
+            <div class="container mt-3 d-flex flex-column justify-content-center align-items-center" style="width: 1000px ;
             margin: 0 auto;" >
-                <div class="card" style="width: 100%;">
+                <div class="card mb-3" style="width: 100%;">
                     <h5 class="card-header text-center">Description</h5>
                     <div class="card-body text-center">
                         <p class="card-text">{{char["description"]}}</p>

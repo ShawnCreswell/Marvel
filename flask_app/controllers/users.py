@@ -1,6 +1,8 @@
 # from ..models.hero import Hero
 from flask_app import app, render_template, redirect, request, session, flash
 from flask_app.models.user import User
+from flask_app.models.like import Like
+
 from flask_bcrypt import Bcrypt
 from pprint import pprint
 import requests
@@ -44,7 +46,7 @@ def index2(id):
         "id": id
     }
     user = User.get_one(data)
-    # user = User.get_all_heros_with_user()
+    # like = Like.get_one_like(data)
     # user = User.get_one_with_heros(data)
     # user = User.favorites(data)
     # user = User.get_one_with_heros(data)
@@ -139,10 +141,11 @@ def update_user():
 #     # return render_template("show.html", user = user, hero = hero)
 #     return redirect (f"dashboard/hero/{user}", hero = Hero.favorites2(data))
 
-# @app.route("/")
-# def home():
-#     print("hello")
-#     return redirect("/")
+@app.route("/logout")
+def signout():
+    print("hello")
+    session.clear()
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)
