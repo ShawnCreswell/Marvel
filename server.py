@@ -5,9 +5,9 @@ from flask_app.controllers import heros
 from marvel import Marvel
 # from import PUBLIC_KEY, PRIVATE_KEY
 
-# marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a72560e27f40a5eec919b7f04feca520215feb16")
+marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a72560e27f40a5eec919b7f04feca520215feb16")
 
-# characters = marvel.characters
+characters = marvel.characters
 
 # my_characters = characters.all(nameStartsWith = "Capt")['data']["results"]
 # print(my_characters[0]["name"])

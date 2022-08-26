@@ -8,6 +8,8 @@ marvel = "*"
 flask = "*"
 pymysql = "*"
 flask-bcrypt = "*"
+requests = "*"
+bcrypt = "*"
 
 [dev-packages]
 

@@ -1,29 +1,41 @@
-jQuery(document).ready(function($){
+// const charactersList = document.getElementById('charactersList');
+// const searchBar = document.getElementById('searchBar');
+// let hpCharacters = [];
+// console.log(searchBar);
+// searchBar.addEventListener("keyup",(e) => {
+//     const searchString = e.target.value;
+//     const filteredCharacters = hpCharacters.filter( character => {
+//         return character.name.contain(searchString) || character.house.contain(searchString);
+//     });
+//     console.log(filteredCharacters);
+// });
 
-    $('.live-search-list li').each(function(){
-    $(this).attr('data-search-term', $(this).text().toLowerCase());
-    });
-    
-    $('.live-search-box').on('keyup', function(){
-    
-    var searchTerm = $(this).val().toLowerCase();
-    
-        $('.live-search-list li').each(function(){
-    
-            if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-    
-        });
-    
-    });
-    
-    });
+// const loadCharacters = async () => {
+//     try {
+//         const res = await fetch('https://hp-api.herokuapp.com/api/characters');
 
+//         hpCharacters = await res.json();
+//         displayCharacters(hpCharacters);
+//         console.log(hpCharacters)
 
-    fetch("https://youtube.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&q=hulk&key=AIzaSyDmNcGpYoh7kWzRRdoNFY8C9xQS4V1sIyk")
-    .then((data)=>{
-        console.log(data)
-    })
+//     } catch (err) {
+//         console.error(err);
+//     }
+// };
+
+// const displayCharacters = (characters) => {
+//     const htmlString = characters
+//         .map((character) => {
+//             return `
+//             <li class="character">
+//                 <h2>${character.name}</h2>
+//                 <p>House: ${character.house}</p>
+//                 <img src="${character.image}"></img>
+//             </li>
+//         `;
+//         })
+//         .join('');
+//     charactersList.innerHTML = htmlString;
+// };
+
+// loadCharacters();

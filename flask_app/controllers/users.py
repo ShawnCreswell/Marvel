@@ -7,8 +7,8 @@ from flask_bcrypt import Bcrypt
 from pprint import pprint
 import requests
 
-from marvel import Marvel   
-marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a72560e27f40a5eec919b7f04feca520215feb16")
+# from marvel import Marvel   
+# marvel = Marvel(PUBLIC_KEY="0b340cd6701075fffe6b41aeec6947b3" , PRIVATE_KEY= "a72560e27f40a5eec919b7f04feca520215feb16")
 bcrypt = Bcrypt(app)
 
 @app.route("/signin")
@@ -142,7 +142,7 @@ def update_user():
 #     return redirect (f"dashboard/hero/{user}", hero = Hero.favorites2(data))
 
 @app.route("/logout")
-def signout():
+def logout():
     print("hello")
     session.clear()
     return redirect("/")

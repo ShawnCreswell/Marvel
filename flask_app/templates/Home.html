@@ -65,58 +65,36 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#" style="color: white;">Something else here</a></li>
+                        <!-- <li><a class="dropdown-item" href="#" style="color: white;">Something else here</a></li> -->
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                    <!-- <a class="nav-link disabled">Disabled</a> -->
                 </li>
             </ul>
-            {% if session.first_name == user.first_name %}
             <a href="/logout" class="btn btn-primary">Sign out </a>
-            {% else %}
-            <form class="d-flex" role="search">
-                <a href="/signin" class="btn btn-primary">Sign in </a>
-            </form>
-            {% endif %}
+            <a href="/signin" class="btn btn-primary">Sign in </a>
         </div>
     </div>
 </nav>
     <!-- NavBar End -->
     <!-- 1 Container start -->
     <div class="container2">
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 1000px;">
-        <div class="card bg-dark" style="width: 18rem;">
-            <div class="card-body">
-                
-        <form  role="search" action="/search" , method="post">
-                <label for="exampleFormControlInput1" class=" d-flex form-label justify-content-center" style="color: White;"><h2>Search For a Hero</h2></label>
-                <input type="name" name="hero" class="form-control" id="hero"
-                placeholder="">
-                <div class="d-flex justify-content-center align-items-center mt-2"><input class="btn btn-primary" type="submit" name="" value="Search"></div>
-        </form>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"
-                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-                jQuery(document).ready(function ($) {
-                    $('.live-search-list li').each(function () {
-                        $(this).attr('data-search-term', $(this).text().toLowerCase());
-                    });
-                    $('.live-search-box').on('keyup', function () {
-                        var searchTerm = $(this).val().toLowerCase();
-                        $('.live-search-list li').each(function () {
-                            if ($(this).filter('[data-search-term *= ' + searchTerm + ']').length > 0 || searchTerm.length < 1) {
-                                $(this).show();
-                            } else {
-                                $(this).hide();
-                            }
-                        });
-                    });
-                });
-        </script>
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 1000px;">
+            <div class="card bg-dark" style="width: 18rem;">
+                <div class="card-body">
+                    <form action="/search" , method="post">
+                        <label for="exampleFormControlInput1" class=" d-flex form-label justify-content-center" style="color: White;"><h2>Search For a Hero</h2></label>
+                        <input type="name" name="hero" class="form-control" id="hero"
+                        placeholder="">
+                        <div class="d-flex justify-content-center align-items-center mt-2">
+                            <input class="btn btn-primary" type="submit" name="" value="Search">
+                        </div>
+                    </form>
+                    
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 </html>
